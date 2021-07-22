@@ -1,7 +1,7 @@
 # Draft Status
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/nebojsa-trinityrank/laravel-disk-monitor.svg?style=flat-square)](https://packagist.org/packages/nebojsa-trinityrank/laravel-disk-monitor)
-[![Total Downloads](https://img.shields.io/packagist/dt/nebojsa-trinityrank/laravel-disk-monitor.svg?style=flat-square)](https://packagist.org/packages/nebojsa-trinityrank/laravel-disk-monitor)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/nebojsa-trinityrank/laravel-disk-monitor.svg?style=flat-square)](https://packagist.org/packages/trinityrank/draft-status)
+[![Total Downloads](https://img.shields.io/packagist/dt/nebojsa-trinityrank/laravel-disk-monitor.svg?style=flat-square)](https://packagist.org/packages/trinityrank/draft-status)
 
 ---
 
