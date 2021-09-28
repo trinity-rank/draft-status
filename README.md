@@ -1,7 +1,6 @@
 # Draft Status
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/trinityrank/draft-status.svg?style=flat-square)](https://packagist.org/packages/trinityrank/draft-status)
-
 [![Total Downloads](https://img.shields.io/packagist/dt/trinityrank/draft-status.svg?style=flat-square)](https://packagist.org/packages/trinityrank/draft-status)
 
 ---
