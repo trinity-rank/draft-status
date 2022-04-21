@@ -2,6 +2,7 @@
 
 namespace Trinityrank\DraftStatus\Fields;
 
+use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Panel;
 use Trinityrank\DraftStatus\DraftStatus;
@@ -39,11 +40,16 @@ class DraftComponents
     {
         return [
             DraftStatus::make('Status')->onlyOnIndex(),
+            // Badge::make('Status')->map([
+            //     '0' => 'info',
+            //     '1' => 'success',
+            // ]),
         ];
     }
 
     public static function index()
     {
+        // dd(request()->all());
         return new Panel('', self::indexFields());
     }
 

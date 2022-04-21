@@ -26641,11 +26641,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     components: { PublishIndicator: __WEBPACK_IMPORTED_MODULE_0__PublishIndicator___default.a },
     props: ['resourceName', 'field'],
     computed: {
-        isPublished: function isPublished() {
-            return this.field.value == 1;
-        },
         isDraft: function isDraft() {
             return this.field.value == 0;
+        },
+        isScheduled: function isScheduled() {
+            if (this.field.value == 0) {
+                return false;
+            }
+
+            for (var i in this.$attrs.resource.fields) {
+                if (this.$attrs.resource.fields[i].attribute == "publish_at") {
+                    var publish_at = new Date(this.$attrs.resource.fields[i].value + " GMT").getTime();
+                    var date = new Date().getTime();
+
+                    if (publish_at > date) {
+                        this.field.value = 2;
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        },
+        isPublished: function isPublished() {
+            return this.field.value == 1;
         }
     }
 });
@@ -26685,7 +26704,7 @@ exports = module.exports = __webpack_require__(9)(false);
 
 
 // module
-exports.push([module.i, "\n.badge[data-v-4598e574] {\n  display: inline-block;\n  padding: 0.25em 0.4em;\n  font-size: 75%;\n  font-weight: 700;\n  line-height: 1;\n  text-align: center;\n  white-space: nowrap;\n  vertical-align: baseline;\n  border-radius: 0.25rem;\n  position: relative;\n  bottom: 1px;\n}\n.badge.badge-primary[data-v-4598e574] {\n  background-color: var(--primary);\n  color: var(--white);\n}\n.badge.badge-success[data-v-4598e574] {\n  background-color: var(--success);\n  color: var(--white);\n}\n", ""]);
+exports.push([module.i, "\n.badge[data-v-4598e574] {\n  display: inline-block;\n  padding: 0.25em 0.4em;\n  font-size: 75%;\n  font-weight: 700;\n  line-height: 1;\n  text-align: center;\n  white-space: nowrap;\n  vertical-align: baseline;\n  border-radius: 0.25rem;\n  position: relative;\n  bottom: 1px;\n}\n.badge.badge-primary[data-v-4598e574] {\n  background-color: var(--primary);\n  color: var(--white);\n}\n.badge.badge-success[data-v-4598e574] {\n  background-color: var(--success);\n  color: var(--white);\n}\n.badge.badge-warning[data-v-4598e574] {\n  background-color: #d97706;\n  color: var(--white);\n}\n", ""]);
 
 // exports
 
@@ -27046,9 +27065,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['published', 'draft']
+  props: ['published', 'draft', 'scheduled']
 });
 
 /***/ }),
@@ -27068,6 +27088,12 @@ var render = function() {
     _vm._v(" "),
     _vm.draft
       ? _c("span", { staticClass: "badge badge-primary" }, [_vm._v("DRAFT")])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.scheduled
+      ? _c("span", { staticClass: "badge badge-warning" }, [
+          _vm._v("SCHEDULED")
+        ])
       : _vm._e()
   ])
 }
@@ -27090,7 +27116,11 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("publish-indicator", {
-    attrs: { published: _vm.isPublished, draft: _vm.isDraft }
+    attrs: {
+      draft: _vm.isDraft,
+      scheduled: _vm.isScheduled,
+      published: _vm.isPublished
+    }
   })
 }
 var staticRenderFns = []
@@ -27179,11 +27209,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     components: { PublishIndicator: __WEBPACK_IMPORTED_MODULE_0__PublishIndicator___default.a }
 }, _defineProperty(_props$components$pro, 'props', ['resourceName', 'field']), _defineProperty(_props$components$pro, 'computed', {
-    isPublished: function isPublished() {
-        return this.field.value == 1;
-    },
     isDraft: function isDraft() {
         return this.field.value == 0;
+    },
+    isScheduled: function isScheduled() {
+        if (this.field.value == 0) {
+            return false;
+        }
+
+        for (var i in this.$attrs.resource.fields) {
+            if (this.$attrs.resource.fields[i].attribute == "publish_at") {
+                var publish_at = new Date(this.$attrs.resource.fields[i].value + " GMT").getTime();
+                var date = new Date().getTime();
+
+                if (publish_at > date) {
+                    this.field.value = 2;
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    },
+    isPublished: function isPublished() {
+        return this.field.value == 1;
     }
 }), _props$components$pro);
 
@@ -27204,7 +27253,11 @@ var render = function() {
         { slot: "value" },
         [
           _c("publish-indicator", {
-            attrs: { published: _vm.isPublished, draft: _vm.isDraft }
+            attrs: {
+              draft: _vm.isDraft,
+              scheduled: _vm.isScheduled,
+              published: _vm.isPublished
+            }
           })
         ],
         1

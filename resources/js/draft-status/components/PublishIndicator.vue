@@ -2,12 +2,13 @@
   <div>
     <span v-if="published" class="badge badge-success">PUBLISHED</span>
     <span v-if="draft" class="badge badge-primary">DRAFT</span>
+    <span v-if="scheduled" class="badge badge-warning">SCHEDULED</span>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['published', 'draft'],
+  props: ['published', 'draft', 'scheduled'],
 };
 </script>
 
@@ -33,6 +34,11 @@ export default {
 
 .badge.badge-success {
   background-color: var(--success);
+  color: var(--white);
+}
+
+.badge.badge-warning {
+  background-color: #d97706;
   color: var(--white);
 }
 </style>
