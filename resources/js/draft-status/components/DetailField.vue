@@ -11,8 +11,6 @@
 import PublishIndicator from './PublishIndicator';
 
 export default {
-    props: ['resource', 'resourceName', 'resourceId', 'field'],
-
     components: { PublishIndicator },
     props: ['resourceName', 'field'],
     computed: {
@@ -22,9 +20,9 @@ export default {
 
         isScheduled() {
             if(this.field.value == 0) {
-                return false; 
+                return false;
             }
-            
+
             for( const i in this.$attrs.resource.fields ){
                 if( this.$attrs.resource.fields[i].attribute == "publish_at" ) {
                     var publish_at = new Date(this.$attrs.resource.fields[i].value + " GMT").getTime();
@@ -36,7 +34,7 @@ export default {
                     }
                 }
             }
-            
+
             return false;
         },
 

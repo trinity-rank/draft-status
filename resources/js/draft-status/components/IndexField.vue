@@ -1,41 +1,55 @@
 <template>
-    <publish-indicator :draft="isDraft" :scheduled="isScheduled" :published="isPublished" />
+    <publish-indicator
+        :draft="isDraft"
+        :scheduled="isScheduled"
+        :published="isPublished"
+    />
 </template>
 
 <script>
-import PublishIndicator from './PublishIndicator';
+import PublishIndicator from './PublishIndicator'
 
 export default {
     components: { PublishIndicator },
     props: ['resourceName', 'field'],
+
     computed: {
         isDraft() {
-            return this.field.value == 0;
+            return this.field.value == 0
         },
 
         isScheduled() {
-            if(this.field.value == 0) {
-                return false; 
+            let fields
+            if (this.field.value == 0) {
+                return false
             }
 
-            for( const i in this.$attrs.resource.fields ){
-                if( this.$attrs.resource.fields[i].attribute == "publish_at" ) {
-                    var publish_at = new Date(this.$attrs.resource.fields[i].value + " GMT").getTime();
-                    var date = new Date().getTime();
+            fields = this.$attrs.resource
+                ? this.$attrs.resource.fields
+                : this.$parent.$children[0].resource.fields
 
-                    if(publish_at > date) {
-                        this.field.value = 2;
-                        return true;
+            for (const i in fields) {
+                if (fields[i].attribute == 'publish_at') {
+                    var publish_at = this.$attrs.resource
+                        ? new Date(fields[i].value + ' GMT').getTime()
+                        : new Date(fields[i].value).getTime()
+
+                    var date = new Date().getTime()
+
+                    if (publish_at > date) {
+                        this.field.value = 2
+                        return true
                     }
+                    return false
                 }
             }
 
-            return false;
+            return true
         },
 
         isPublished() {
-            return this.field.value == 1;
-        },
-    },
-};
+            return this.field.value == 1
+        }
+    }
+}
 </script>
