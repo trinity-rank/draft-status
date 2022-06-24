@@ -30,10 +30,7 @@ export default {
 
             for (const i in fields) {
                 if (fields[i].attribute == 'publish_at') {
-                    var publish_at = this.$attrs.resource
-                        ? new Date(fields[i].value + ' GMT').getTime()
-                        : new Date(fields[i].value).getTime()
-
+                    var publish_at = new Date(fields[i].value + ' GMT').getTime()
                     var date = new Date().getTime()
 
                     if (publish_at > date) {
